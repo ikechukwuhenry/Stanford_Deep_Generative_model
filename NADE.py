@@ -14,7 +14,7 @@ class NADE(nn.Module):
         h = torch.relu(self.fc1(x))
         output = torch.relu(self.fc2(h))
         return output
-    
+
 
 # Example usage
 input_dim = 10
