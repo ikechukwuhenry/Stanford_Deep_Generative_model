@@ -3,6 +3,7 @@ import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
+from PIL import Image
 
 # Define the Autoencoder architecture
 class Autoencoder(nn.Module):
@@ -80,8 +81,13 @@ with torch.no_grad():
     # Flatten and reconstruct the test images
     test_images = test_images.view(test_images.size(0), -1)
     reconstructed = model(test_images)
-    print(reconstructed)
-    print(type(reconstructed))
 
     # Here you could visualize or save the original and reconstructed images
+    for sample_img in reconstructed:
+        sample_img = sample_img.view(28, 28)
+        new_transform = transforms.ToPILImage()
+        image = new_transform(sample_img)
+        image.show()
+        break
+        
     print("Test images reconstructed!")
